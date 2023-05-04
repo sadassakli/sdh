@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Uygulaması</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+    
+    #message-container {
+      height: 400px;
+      overflow-y: scroll;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #fff;
+    }
+    
+    #message-container p {
+      margin: 5px 0;
+    }
+    
+    #message-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    
+    #send-button {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Chat Uygulaması</h1>
+  
+  <div id="message-container"></div>
+  
+  <div>
+    <input type="text" id="message-input">
+    <button id="send-button">Gönder</button>
+  </div>
+  
+  <script>
+    // Kullanıcı adını al
+    var username = prompt("Lütfen kullanıcı adınızı girin:");
+    while (!username) {
+      username = prompt("Lütfen bir kullanıcı adı girin:");
+    }
+    
+    // Mesaj gönderildiğinde yapılacaklar
+    function sendMessage() {
+      var messageInput = document.getElementById("message-input");
+      var message = messageInput.value;
+      messageInput.value = "";
+      
+      if (message) {
+        var messageContainer = document.getElementById("message-container");
+        var newMessage = document.createElement("p");
+        newMessage.innerText = username + ": " + message;
+        messageContainer.appendChild(newMessage);
+      }
+    }
+    
+    // Gönder düğmesine tıklandığında veya Enter'a basıldığında mesaj gönder
+    var sendButton = document.getElementById("send-button");
+    var messageInput = document.getElementById("message-input");
+    sendButton.addEventListener("click", sendMessage);
+    messageInput.addEventListener("keydown", function(event) {
+      if (event.keyCode === 13) {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>
